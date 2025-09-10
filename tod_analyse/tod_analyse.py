@@ -8,7 +8,19 @@ from tqdm import tqdm
 from tod_analyse.em import run_em, log_likelihood_diff
 from tod_analyse.plot import plot_diagnostics
 
-def bimod(tod, chan, obsid, plot=True):
+def bimod(tod, chan, obsid, plot=False):
+    """
+    Apply bimodality checking to a baseline-subtracted 2D array of TODs.
+    Important: apply this method AFTER baseline subtraction!
+
+    @param tod 2D numpy array of TODs. The time axis should be axis 0, the channels should be axis 1.
+    @param chan 1D numpy array containing master indices.
+    @param obsid String containing obsid of articular TOD.
+    @param plot Make plots of histograms and fits and TOD. Default is False.
+
+    @returns Array containing master indices.
+    @returns Array containing differences in log-likelihoods.
+    """
     log_diff_l = []
     chan_l = []
 
@@ -36,16 +48,17 @@ def bimod(tod, chan, obsid, plot=True):
 
     return chan_l, log_diff_l
 
-def nresp(tod, chan, obsid, plot=False):
+def nresp(tod, chan, obsid):
     """
     Find channels with negative responses by calculating correlation coefficient.
+    Important: apply this method BEFORE baseline subtraction!
     
-    @param da Data array containing DEMS file.
-    @param thres_r Threshold for rejection of KID based on correlation coefficient.
-        Default is 0, meaning only KIDs with r < 0 get rejected.
-    @param verbose Whether to print progress info or not. Default is true.
+    @param tod 2D numpy array of TODs. The time axis should be axis 0, the channels should be axis 1.
+    @param chan 1D numpy array containing master indices.
+    @param obsid String containing obsid of articular TOD.
 
-    @returns Array containing master indices of KIDs with negative responses.
+    @returns Array containing master indices.
+    @returns Array containing differences in log-likelihoods.
     """
 
     mat = np.corrcoef(tod.T) 
