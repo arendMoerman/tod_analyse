@@ -1,0 +1,9 @@
+tod_analyse/__pycache__/
+__pycache__/
+*.egg-info/
+
+*.swp
+*.swo
+
+tod_analyse/*.swp
+tod_analyse/*.swo
