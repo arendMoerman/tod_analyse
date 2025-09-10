@@ -35,3 +35,11 @@ It uses the EM algorithm on both the mixture model and single Gaussian.
 
 Aside from returning channel and statistic, these two functions also write a dictionary, named either `<obsid>_bimod.json` or `<obsid>_nresp.json`, to disk.
 These can be stored for later usage so that you don't have to run these checks all the time.
+
+# Plotting diagnostics
+The `bimod` method accepts an optional `plot` argument, which defaults to `plot=False`.
+If set to true, it will plot, for each channel, a histogram with:
+* the fitted mixture model
+* The single-Gaussian
+
+and also the TOD itself. This way you can double-check how well the bimodality check performed.
