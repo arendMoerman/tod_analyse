@@ -58,7 +58,7 @@ def nresp(tod, chan, obsid):
     @param obsid String containing obsid of articular TOD.
 
     @returns Array containing master indices.
-    @returns Array containing differences in log-likelihoods.
+    @returns Array containing median of correlation coefficient.
     """
 
     mat = np.corrcoef(tod.T) 
